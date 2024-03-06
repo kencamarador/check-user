@@ -23,19 +23,20 @@ jobs:
           -d "client_id=$CLIENT_ID&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=$CLIENT_SECRET&grant_type=client_credentials" \
           | jq -r .access_token)
 
-
           echo "Got the request.."
           echo "Trying to Trigger.."
-
 
           response=$(curl -X GET -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           "https://graph.microsoft.com/v1.0/users?$select=userPrincipalName")
           
+
+          USER=$(echo "$FIRSTNAME.$LASTNAME" | tr '[:upper:]' '[:lower:]')
+
           if echo "$response" | grep -q "\"$FIRSTNAME.$LASTNAME@kencamarador.com\""; then
-              echo "User $FIRSTNAME.$LASTNAME@kencamarador.com exists."
+              echo "User $USER@kencamarador.com exists."
               curl -X POST -H 'Content-type: application/json' \
-              --data "{\"issues\":[\"$KEY\"], \"message\":\"$FIRSTNAME.$LASTNAME@kencamarador.com already exists\"}" \
+              --data "{\"issues\":[\"$KEY\"], \"message\":\"$USER@kencamarador.com already exists\"}" \
               https://automation.atlassian.com/pro/hooks/efa83076d8f6078839ac388c4ef79493eb86ede4?issue=$KEY
           else
-              echo "User $FIRSTNAME.$LASTNAME@kencamarador.com does not exist."
+              echo "User $USER@kencamarador.com does not exist."
           fi
