@@ -27,13 +27,15 @@ jobs:
           echo "Got the request.."
           echo "Trying to Trigger.."
 
+
           response=$(curl -X GET -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           "https://graph.microsoft.com/v1.0/users?$select=userPrincipalName")
           
-          if echo "$response" | grep -q "\"jack.ma@kencamarador.com\""; then
-              echo "User jack.ma@kencamarador.com exists."
+          if echo "$response" | grep -q "\"$FIRSTNAME.$LASTNAME@kencamarador.com\""; then
+              echo "User $FIRSTNAME.$LASTNAME@kencamarador.com exists."
+              curl -X POST -H 'Content-type: application/json' \
+              --data "{\"issues\":[\"$KEY\"], \"message\":\"$FIRSTNAME.$LASTNAME@kencamarador.com already exists\"}" \
+              https://automation.atlassian.com/pro/hooks/efa83076d8f6078839ac388c4ef79493eb86ede4?issue=$KEY
           else
-              echo "User jack.ma@kencamarador.com does not exist."
+              echo "User $FIRSTNAME.$LASTNAME@kencamarador.com does not exist."
           fi
-
-
