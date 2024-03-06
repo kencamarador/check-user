@@ -27,6 +27,16 @@ jobs:
           echo "Got the request.."
           echo "Trying to Trigger.."
 
+          response=$(curl -X GET -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
+          "https://graph.microsoft.com/v1.0/users")
+          
+          if echo "$response" | grep -q "$firstname.$lastname@kencamarador.com"; then
+              echo "User $firstname.$lastname@kencamarador.com exists."
+          else
+              echo "User $firstname.$lastname@kencamarador.com does not exist."
+          fi
+
+
           curl -X POST -H 'Content-type: application/json' \
-          --data "{\"issues\":[\"$KEY\"]}" \
+          --data "{\"issues\":[\"$KEY\"], \"message\":\"$FIRSTNAME.$LASTNAME@kencamarador.com already exists\"}" \
           https://automation.atlassian.com/pro/hooks/efa83076d8f6078839ac388c4ef79493eb86ede4?issue=$KEY
