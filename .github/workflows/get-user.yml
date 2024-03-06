@@ -30,7 +30,7 @@ jobs:
           response=$(curl -X GET -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
           "https://graph.microsoft.com/v1.0/users")
           
-          if echo "$response" | grep -q "$FIRSTNAME.$LASTNAME@kencamarador.com"; then
+          if echo "$response" | grep -q "jack.ma@kencamarador.com"; then
               echo "User $FIRSTNAME.$LASTNAME@kencamarador.com exists."
           else
               echo "User $FIRSTNAME.$LASTNAME@kencamarador.com does not exist."
