@@ -32,9 +32,6 @@ jobs:
           
           if echo "$response" | grep -q "$FIRSTNAME.$LASTNAME@kencamarador.com"; then
               echo "User $FIRSTNAME.$LASTNAME@kencamarador.com exists."
-              curl -X POST -H 'Content-type: application/json' \
-              --data "{\"issues\":[\"$KEY\"]}" \
-              https://automation.atlassian.com/pro/hooks/efa83076d8f6078839ac388c4ef79493eb86ede4?issue=$KEY
           else
               echo "User $FIRSTNAME.$LASTNAME@kencamarador.com does not exist."
           fi
