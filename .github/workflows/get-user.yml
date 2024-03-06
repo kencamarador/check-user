@@ -32,7 +32,7 @@ jobs:
 
           USER=$(echo "$FIRSTNAME.$LASTNAME" | tr '[:upper:]' '[:lower:]')
 
-          if echo "$response" | grep -q "\"$FIRSTNAME.$LASTNAME@kencamarador.com\""; then
+          if echo "$response" | grep -q "\"$USER@kencamarador.com\""; then
               echo "User $USER@kencamarador.com exists."
               curl -X POST -H 'Content-type: application/json' \
               --data "{\"issues\":[\"$KEY\"], \"message\":\"$USER@kencamarador.com already exists\"}" \
