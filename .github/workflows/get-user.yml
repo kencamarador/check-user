@@ -28,7 +28,7 @@ jobs:
           echo "Trying to Trigger.."
 
           response=$(curl -X GET -H "Authorization: Bearer $TOKEN" -H "Content-type: application/json" \
-          "https://graph.microsoft.com/v1.0/users?select=userPrincipalName")
+          "https://graph.microsoft.com/v1.0/users?$select=userPrincipalName")
           
           if echo "$response" | grep -q "\"jack.ma@kencamarador.com\""; then
               echo "User jack.ma@kencamarador.com exists."
