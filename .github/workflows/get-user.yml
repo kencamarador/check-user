@@ -27,6 +27,3 @@ jobs:
           echo "Got the request..""
           echo "Trying to Trigger.."
 
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"issues":["TEST-1"]}' \
-          https://automation.atlassian.com/pro/hooks/efa83076d8f6078839ac388c4ef79493eb86ede4?issue=$key
