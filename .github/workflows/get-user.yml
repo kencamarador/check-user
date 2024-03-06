@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Account Provisioning - Developer
+      - name: Check User
         env:
           KEY: ${{ github.event.client_payload.key }}
           FIRSTNAME: ${{ github.event.client_payload.firstname }}
@@ -23,5 +23,10 @@ jobs:
           -d "client_id=$CLIENT_ID&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=$CLIENT_SECRET&grant_type=client_credentials" \
           | jq -r .access_token)
 
-          echo "Got the token"
-          echo "$FIRSTNAME $LASTNAME to be created..."
+
+          echo "Got the request..""
+          echo "Trying to Trigger.."
+
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"issues":["TEST-1"]}' \
+          https://automation.atlassian.com/pro/hooks/efa83076d8f6078839ac388c4ef79493eb86ede4?issue=$key
