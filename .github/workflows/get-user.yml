@@ -7,6 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Check User
+        if: github.event.client_payload.workflow_file == 'get-user.yml'
         env:
           KEY: ${{ github.event.client_payload.key }}
           FIRSTNAME: ${{ github.event.client_payload.firstname }}
