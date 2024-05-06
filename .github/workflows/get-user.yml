@@ -34,12 +34,6 @@ jobs:
 
           if echo "$response" | grep -q "\"$USER@kencamarador.com\""; then
               echo "User $USER@kencamarador.com exists."
-              curl -X POST -H 'Content-type: application/json' \
-              --data "{\"issues\":[\"$KEY\"], \"message\":\"$USER@kencamarador.com already exists\"}" \
-              https://automation.atlassian.com/pro/hooks/efa83076d8f6078839ac388c4ef79493eb86ede4?issue=$KEY
           else
               echo "User $USER@kencamarador.com does not exist."
-              curl -X POST -H 'Content-type: application/json' \
-              --data "{\"issues\":[\"$KEY\"], \"message\":\"$USER@kencamarador.com does not exists\"}" \
-              https://automation.atlassian.com/pro/hooks/11a6f7549365dd41573bb93363e9e3fea9555ab4?issue=$KEY
           fi
