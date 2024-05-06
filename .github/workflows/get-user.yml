@@ -43,3 +43,5 @@ jobs:
               --data "{\"issues\":[\"$KEY\"], \"message\":\"$USER@kencamarador.com does not exists\"}" \
               https://automation.atlassian.com/pro/hooks/11a6f7549365dd41573bb93363e9e3fea9555ab4?issue=$KEY
           fi
+
+
