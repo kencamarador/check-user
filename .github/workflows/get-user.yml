@@ -1,6 +1,11 @@
 on:
   workflow_dispatch:
-  
+    inputs:
+      version:
+        description: 'version'     
+        required: true
+        default: 'latest'
+        
 jobs:
   build:
     runs-on: ubuntu-latest

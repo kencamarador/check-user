@@ -1,5 +1,10 @@
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'version'     
+        required: true
+        default: 'latest'
   
 jobs:
   build:
