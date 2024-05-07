@@ -1,10 +1,18 @@
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: 'version'     
+      key:
+        description: 'Issue key'
         required: true
-        default: 'latest'
+      jira-token:
+        description: 'JIRA token'
+        required: true
+      firstname:
+        description: 'First name'
+        required: true
+      lastname:
+        description: 'Last name'
+        required: true
         
 jobs:
   build:
