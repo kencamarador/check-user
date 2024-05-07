@@ -1,6 +1,9 @@
 on:
   workflow_dispatch:
     inputs:
+      title:
+        description: 'Title of the workflow run'
+        required: false
       key:
         description: 'Issue key'
         required: true
@@ -19,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Set Workflow Run Title
+        run: echo "::set-env name=WORKFLOW_RUN_TITLE::${{ github.event.inputs.firstname }} ${{ github.event.inputs.lastname }} Onboarding"
+
       - name: Check User
         env:
           KEY: ${{ github.event.inputs.key }}
