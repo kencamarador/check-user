@@ -1,20 +1,6 @@
-name: Workflow 1
 on:
-  workflow_dispatch:
-    inputs:
-      key:
-        description: 'Issue key'
-        required: true
-      jira-token:
-        description: 'JIRA token'
-        required: true
-      firstname:
-        description: 'First name'
-        required: true
-      lastname:
-        description: 'Last name'
-        required: true
-
+  repository_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,10 +8,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check User
         env:
-          KEY: ${{ github.event.inputs.key }}
-          FIRSTNAME: ${{ github.event.inputs.firstname }}
-          LASTNAME: ${{ github.event.inputs.lastname }}
-          JOBTITLE: ${{ github.event.inputs.title }}
+          KEY: ${{ github.event.client_payload.key }}
+          FIRSTNAME: ${{ github.event.client_payload.firstname }}
+          LASTNAME: ${{ github.event.client_payload.lastname }}
+          JOBTITLE: ${{ github.event.client_payload.title }}
         run: |
           CLIENT_ID=${{ vars.CLIENT_ID }}
           CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
